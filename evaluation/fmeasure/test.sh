@@ -1,0 +1,38 @@
+#!/bin/bash
+
+GROUNDTRUTHDIR="../../groundtruth/output"
+OTSUDIR="../otsu/Negatives/output"
+WATERSHEDDIR="../watershed/output"
+EXE="./Fscore"
+
+
+touch results_otsu.txt
+OTSURESULTS='./results_otsu.txt'
+
+touch results_watershed.txt
+WATERSHEDRESULTS='./results_watershed.txt'
+
+
+
+OTSULIST=$(ls $OTSUDIR)
+GROUNDTRUTHLIST=$(ls $GROUNDTRUTHDIR)
+for GROUNDTRUTHIMAGE in $GROUNDTRUTHLIST
+do
+  for OTSUIMAGE in $OTSULIST
+  do
+   if [ ${OTSUIMAGE%%.*} = ${GROUNDTRUTHIMAGE%%.*} ];then
+   $EXE $GROUNDTRUTHDIR/$GROUNDTRUTHIMAGE $OTSUDIR/$OTSUIMAGE $OTSURESULTS
+   fi
+  done
+done
+
+WATERSHEDLIST=$(ls $WATERSHEDDIR)
+for GROUNDTRUTHIMAGE in $GROUNDTRUTHLIST
+do
+  for WATERSHEDIMAGE in $WATERSHEDLIST
+  do
+   if [ ${WATERSHEDIMAGE%%.*} = ${GROUNDTRUTHIMAGE%%.*} ];then
+   $EXE $GROUNDTRUTHDIR/$GROUNDTRUTHIMAGE $WATERSHEDDIR/$WATERSHEDIMAGE $WATERSHEDRESULTS
+   fi
+  done
+done

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+INPUTDIR="../../dataset"
+OUTPUTDIR="./output"
+PYFILE="./main.py"
+
+INPUTLIST=$(ls $INPUTDIR)
+
+for INPUTIMAGE in $INPUTLIST
+do
+python $PYFILE $INPUTDIR/$INPUTIMAGE $OUTPUTDIR/$INPUTIMAGE
+done
