@@ -1,6 +1,7 @@
 import numpy as np
-import cv2
 import sys
+sys.path.append('/usr/local/lib/python2.7/site-packages') #加入OpenCV的Python库
+import cv2
 from matplotlib import pyplot as plt
 
 img = cv2.imread(sys.argv[1])
